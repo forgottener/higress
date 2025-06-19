@@ -352,14 +352,59 @@ func getApiName(path string) provider.ApiName {
 	if strings.HasSuffix(path, "/v1/images/generations") {
 		return provider.ApiNameImageGeneration
 	}
+	if strings.HasSuffix(path, "/v1/images/variations") {
+		return provider.ApiNameImageVariation
+	}
+	if strings.HasSuffix(path, "/v1/images/edits") {
+		return provider.ApiNameImageEdit
+	}
 	if strings.HasSuffix(path, "/v1/batches") {
 		return provider.ApiNameBatches
+	}
+	if util.RegRetrieveBatchPath.MatchString(path) {
+		return provider.ApiNameRetrieveBatch
+	}
+	if util.RegCancelBatchPath.MatchString(path) {
+		return provider.ApiNameCancelBatch
 	}
 	if strings.HasSuffix(path, "/v1/files") {
 		return provider.ApiNameFiles
 	}
+	if util.RegRetrieveFilePath.MatchString(path) {
+		return provider.ApiNameRetrieveFile
+	}
+	if util.RegRetrieveFileContentPath.MatchString(path) {
+		return provider.ApiNameRetrieveFileContent
+	}
 	if strings.HasSuffix(path, "/v1/models") {
 		return provider.ApiNameModels
+	}
+	if strings.HasSuffix(path, "/v1/fine_tuning/jobs") {
+		return provider.ApiNameFineTuningJobs
+	}
+	if util.RegRetrieveFineTuningJobPath.MatchString(path) {
+		return provider.ApiNameFineTuningRetrieveJob
+	}
+	if util.RegRetrieveFineTuningJobEventsPath.MatchString(path) {
+		return provider.PathOpenAIFineTuningJobEvents
+	}
+	if util.RegRetrieveFineTuningJobCheckpointsPath.MatchString(path) {
+		return provider.PathOpenAIFineTuningJobCheckpoints
+	}
+	if util.RegCancelFineTuningJobPath.MatchString(path) {
+		return provider.ApiNameFineTuningCancelJob
+	}
+	if util.RegResumeFineTuningJobPath.MatchString(path) {
+		return provider.ApiNameFineTuningResumeJob
+	}
+	if util.RegPauseFineTuningJobPath.MatchString(path) {
+		return provider.ApiNameFineTuningPauseJob
+	}
+	if util.RegFineTuningCheckpointPermissionPath.MatchString(path) {
+		return provider.ApiNameFineTuningCheckpointPermissions
+	}
+	if util.RegDeleteFineTuningCheckpointPermissionPath.MatchString(path) {
+		return provider.PathOpenAIFineDeleteTuningCheckpointPermission
 	}
 	// cohere style
 	if strings.HasSuffix(path, "/v1/rerank") {
